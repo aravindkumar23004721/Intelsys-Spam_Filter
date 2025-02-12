@@ -1,5 +1,5 @@
 # TITLE:
-**SpamShield**
+## **SpamShield**
 # BRIEF EXPLANATION ABOUT THE WORKING MODEL:
 This machine learning-based spam filter predicts whether an email is **spam or not** using a **pre-trained model**. It processes email content with **NLP techniques**, extracts features, and classifies emails using algorithms like **Naïve Bayes, SVM, or Deep Learning**. The system is optimized for **accuracy, real-time predictions, and potential deployment** in email services or web apps. 🚀
 
@@ -12,10 +12,13 @@ This spam filter model uses the **Naïve Bayes algorithm**, a probabilistic clas
 3. **Classification:** It applies **Bayes' Theorem** to predict whether the email belongs to the **spam** or **ham** category by comparing likelihood probabilities.  
 4. **Prediction & Evaluation:** The model is trained on a labeled dataset and tested using metrics like **accuracy, precision, recall, and F1-score** to ensure reliable predictions.  
 
-
 # TECHNOLOGY USED FOR BUILDING THE FRONT-END:
-(mention what technology you used to build the front-end for this model)
-(include a short description about the technology)
+The front-end for this spam filter model is built using **Tkinter**, Python’s built-in GUI toolkit.  
+
+#### **Short Description:**  
+🔹 **Tkinter** – A standard Python library for creating desktop applications with a simple and interactive graphical user interface (GUI).  
+🔹 It provides widgets like **buttons, labels, text boxes, and frames** to build a user-friendly interface.  
+🔹 The application takes user input (email text), processes it, and displays the classification result (Spam or Not Spam) in real-time.  
 
 # STEP-BY-STEP EXPLANATION OF THE CODE:
 (Explain in your style on how your code works)
