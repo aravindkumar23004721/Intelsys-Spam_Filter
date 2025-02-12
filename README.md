@@ -21,6 +21,7 @@ The front-end for this spam filter model is built using **Tkinter**, Python’s 
 🔹 The application takes user input (email text), processes it, and displays the classification result (Spam or Not Spam) in real-time.  
 
 # STEP-BY-STEP EXPLANATION OF THE CODE:
+
 ## Backend: spam_filter_backend.py (Machine Learning Model)
 This file trains the spam classifier and provides a function to classify messages.
 import pandas as pd
@@ -51,9 +52,11 @@ def classify_text(message):
     message_vector = vectorizer.transform([message])
     prediction = model.predict(message_vector)[0]
     return "Spam" if prediction == 1 else "Ham"
-## How It Works?
+
+### How It Works?
 The backend of the Spam Message Classifier handles **data processing, model training, and message classification**. It loads a **spam dataset**, encodes labels, and splits the data into **training and testing sets**. A **CountVectorizer** converts text into numerical features, and a **Naïve Bayes classifier** is trained on the processed data. When a user enters a message, it is **vectorized and passed to the trained model**, which predicts whether it is **spam or ham**. The prediction is then sent back to the front-end for display. This ensures **efficient and accurate spam detection** in real-time.
     
+
 ## Frontend: spam_filter_gui.py (User Interface with Tkinter)
 This file builds the GUI and interacts with the backend.
 
@@ -119,7 +122,8 @@ canvas.create_window(root.winfo_screenwidth() // 2, 350, window=result_label)
 
 ### Run GUI
 root.mainloop()
-## How It Works?
+
+### How It Works?
 The front-end of the Spam Message Classifier uses **Tkinter** to create a user-friendly interface. It features a **fullscreen window** with a background image, a **header label**, and a **scrollable text box** for message input. A **button frame** holds the **"Classify"** and **"Exit"** buttons. When the user enters a message and clicks **"Classify"**, it sends the input to the backend for prediction, displaying the result in **red (spam) or green (ham)**. If no text is entered, a **warning message** appears. The **"Exit" button** closes the app smoothly, ensuring a visually appealing and functional experience.
 
 
