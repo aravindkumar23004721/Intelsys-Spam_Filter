@@ -1,5 +1,5 @@
 # TITLE:
-SpamShield
+**SpamShield**
 # BRIEF EXPLANATION ABOUT THE WORKING MODEL:
 This machine learning-based spam filter predicts whether an email is **spam or not** using a **pre-trained model**. It processes email content with **NLP techniques**, extracts features, and classifies emails using algorithms like **Naïve Bayes, SVM, or Deep Learning**. The system is optimized for **accuracy, real-time predictions, and potential deployment** in email services or web apps. 🚀
 
