@@ -128,8 +128,14 @@ The front-end of the Spam Message Classifier uses **Tkinter** to create a user-f
 
 
 # OUTPUT:
+### Interface:
+![Screenshot 2025-02-12 121240](https://github.com/user-attachments/assets/1a5cdddd-8c50-40d0-913a-0d4d5b8dc86d)
 
-(include the screenshots of accuracy score, confusion matrix & classification report)
-(include the screenshot of the working User Interface)
+### Spam:
+![Screenshot 2025-02-12 121029](https://github.com/user-attachments/assets/adff7a8a-696d-4ea4-baba-1c6430e7066f)
+
+### Ham:
+![Screenshot 2025-02-12 120959](https://github.com/user-attachments/assets/61a2d759-9a26-4107-851e-935a1c79bcd7)
 
 # RESULT:
+The program classifies messages as **Spam (red)** or **Ham (green)** based on user input. If the input is empty, a **warning message** appears. The trained **Naïve Bayes model** achieves around **95-99% accuracy** on test data. Results are displayed in a user-friendly interface with a **background image and styled text**. 
