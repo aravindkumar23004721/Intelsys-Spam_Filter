@@ -21,8 +21,107 @@ The front-end for this spam filter model is built using **Tkinter**, Python’s 
 🔹 The application takes user input (email text), processes it, and displays the classification result (Spam or Not Spam) in real-time.  
 
 # STEP-BY-STEP EXPLANATION OF THE CODE:
-(Explain in your style on how your code works)
-(for both model's program and front-end's program)
+## Backend: spam_filter_backend.py (Machine Learning Model)
+This file trains the spam classifier and provides a function to classify messages.
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+# Load dataset
+data = pd.read_csv('spam_ham_dataset.csv', encoding='latin-1')
+data = data[['label', 'text']]
+data['label'] = data['label'].map({'ham': 0, 'spam': 1})
+
+# Split data
+X = data['text']
+y = data['label']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Vectorization
+vectorizer = CountVectorizer()
+X_train_vectors = vectorizer.fit_transform(X_train)
+
+# Train Model
+model = MultinomialNB()
+model.fit(X_train_vectors, y_train)
+
+# Function to classify a message
+def classify_text(message):
+    message_vector = vectorizer.transform([message])
+    prediction = model.predict(message_vector)[0]
+    return "Spam" if prediction == 1 else "Ham"
+## How It Works?
+The backend of the Spam Message Classifier handles **data processing, model training, and message classification**. It loads a **spam dataset**, encodes labels, and splits the data into **training and testing sets**. A **CountVectorizer** converts text into numerical features, and a **Naïve Bayes classifier** is trained on the processed data. When a user enters a message, it is **vectorized and passed to the trained model**, which predicts whether it is **spam or ham**. The prediction is then sent back to the front-end for display. This ensures **efficient and accurate spam detection** in real-time.
+    
+## Frontend: spam_filter_gui.py (User Interface with Tkinter)
+This file builds the GUI and interacts with the backend.
+
+import tkinter as tk
+from tkinter import messagebox, scrolledtext
+from PIL import Image, ImageTk
+from spam_filter_backend import classify_text  # Importing the backend function
+
+# Function to classify message using backend
+def classify_message():
+    message = entry.get("1.0", tk.END).strip()
+    if message == "":
+        messagebox.showwarning("Input Error", "Please enter a message to classify.")
+        return
+    
+    prediction = classify_text(message)  # Calling backend function
+    result_label.config(text=f"The message is classified as: {prediction}",
+                        fg="#FF5733" if prediction == "Spam" else "#33FF57",
+                        font=("Helvetica", 14, "bold"))
+
+# Function to exit the app
+def exit_app():
+    root.destroy()
+
+# GUI Setup
+root = tk.Tk()
+root.title("Spam Filter")
+root.state("zoomed")  # Maximized Window
+
+# Load background image
+bg_image = Image.open("unnamed.webp")
+bg_image = bg_image.resize((root.winfo_screenwidth(), root.winfo_screenheight()))
+bg_photo = ImageTk.PhotoImage(bg_image)
+
+# Create Canvas
+canvas = tk.Canvas(root, width=root.winfo_screenwidth(), height=root.winfo_screenheight())
+canvas.pack(fill="both", expand=True)
+canvas.create_image(0, 0, image=bg_photo, anchor="nw")
+
+# Header
+header = tk.Label(root, text="Spam Message Classifier", font=("Helvetica", 20, "bold"), bg="#000000", fg="#00FFFF")
+canvas.create_window(root.winfo_screenwidth() // 2, 50, window=header)
+
+# Text Input
+entry = scrolledtext.ScrolledText(root, width=80, height=5, font=("Courier New", 12, "italic"))
+canvas.create_window(root.winfo_screenwidth() // 2, 150, window=entry)
+
+# Button Frame
+button_frame = tk.Frame(root, bg="#000000")
+canvas.create_window(root.winfo_screenwidth() // 2, 250, window=button_frame)
+
+classify_button = tk.Button(button_frame, text="Classify", command=classify_message,
+                            font=("Helvetica", 12, "bold"), bg="#1E90FF", fg="white", padx=10, pady=5)
+classify_button.grid(row=0, column=0, padx=10, pady=10)
+
+exit_button = tk.Button(button_frame, text="Exit", command=exit_app,
+                        font=("Helvetica", 12, "bold"), bg="#DC143C", fg="white", padx=10, pady=5)
+exit_button.grid(row=0, column=1, padx=10, pady=10)
+
+# Output Label
+result_label = tk.Label(root, text="", font=("Helvetica", 14, "bold"), bg="#000000")
+canvas.create_window(root.winfo_screenwidth() // 2, 350, window=result_label)
+
+# Run GUI
+root.mainloop()
+## How It Works?
+The front-end of the Spam Message Classifier uses **Tkinter** to create a user-friendly interface. It features a **fullscreen window** with a background image, a **header label**, and a **scrollable text box** for message input. A **button frame** holds the **"Classify"** and **"Exit"** buttons. When the user enters a message and clicks **"Classify"**, it sends the input to the backend for prediction, displaying the result in **red (spam) or green (ham)**. If no text is entered, a **warning message** appears. The **"Exit" button** closes the app smoothly, ensuring a visually appealing and functional experience.
+
 
 # OUTPUT:
 
